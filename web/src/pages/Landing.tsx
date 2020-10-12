@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiArrowRight } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 import '../styles/pages/landing.css'
 
@@ -18,12 +19,12 @@ function Landing() {
 
         <div className='location'>
           <strong>Natal</strong>
-          <strong>Rio Grande do Norte</strong>
+          <span>Rio Grande do Norte</span>
         </div>
 
-        <a href='' className='enter-app'>
+        <Link to='/app' className='enter-app'>
           <FiArrowRight size={26} color='rgba(0, 0, 0, 0.6)' />
-        </a>
+        </Link>
       </div>
     </div>
   )
