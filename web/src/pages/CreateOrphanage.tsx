@@ -78,10 +78,10 @@ export default function CreateOrphanage() {
       data.append('images', image)
     })
 
-    await api.post('orphanages', data)
+    const response = await api.post('orphanages', data)
     alert('Orfanato cadastrado com sucesso padrinho')
 
-    history.push('/app')
+    history.push(`/orphanages/${response.data.id}`)
   }
 
   return (
