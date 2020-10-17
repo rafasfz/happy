@@ -10,6 +10,8 @@ import Sidebar from '../components/Sidebar'
 import mapIcon from '../utils/mapIcon'
 import api from '../services/api'
 
+import xCircle from '../images/x-circle.svg'
+
 export default function CreateOrphanage() {
   const history = useHistory()
 
@@ -37,7 +39,7 @@ export default function CreateOrphanage() {
       return
     }
 
-    const selectedImages = Array.from(event.target.files)
+    const selectedImages = [...images, ...Array.from(event.target.files)]
 
     setImages(selectedImages)
 
@@ -46,6 +48,15 @@ export default function CreateOrphanage() {
     })
 
     setPreviewImages(selectedImagesPreview)
+  }
+
+  function handleDeleteImage(indice: number) {
+    const imagesFiltered = images.filter((image, i) => i !== indice)
+    const previewImagesFiltered = previewImages.filter(
+      (image, i) => i !== indice
+    )
+    setImages([...imagesFiltered])
+    setPreviewImages([...previewImagesFiltered])
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -132,8 +143,18 @@ export default function CreateOrphanage() {
               <label htmlFor='images'>Fotos</label>
 
               <div className='images-container'>
-                {previewImages.map((image) => {
-                  return <img key={image} src={image} alt={name} />
+                {previewImages.map((image, i) => {
+                  return (
+                    <div key={image} className='image-container'>
+                      <img
+                        src={xCircle}
+                        className='x-circle'
+                        alt='deletar imagem'
+                        onClick={() => handleDeleteImage(i)}
+                      />
+                      <img src={image} alt={name} className='image' />
+                    </div>
+                  )
                 })}
 
                 <label htmlFor='image[]' className='new-image'>
